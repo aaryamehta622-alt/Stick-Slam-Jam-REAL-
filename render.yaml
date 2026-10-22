@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: stick-slam-jam-multiplayer
+    runtime: node
+    plan: starter
+    numInstances: 1
+    buildCommand: npm --prefix server ci --include=dev && npm --prefix server run build
+    startCommand: npm --prefix server start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        sync: false
